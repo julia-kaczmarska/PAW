@@ -1,9 +1,10 @@
 package com.jsfcourse.calc;
 
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -15,7 +16,6 @@ public class KredBB {
     private String lata;
     private String procent;
     private Double result;
-    public boolean nope = true;
 
     public String getKwota() {
         return kwota;
@@ -44,49 +44,54 @@ public class KredBB {
     public Double getResult() {
         return result;
     }
+    
+    public void setResult(Double result) {
+        this.result = result;
+    }
 
-    public String calculateLoan() {
-        // Validation
-        if (kwota == null || lata == null || procent == null) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Uzupełnij wszystkie pola",null));
-            return null; // Exit the method on validation failure
-        }
-
-        try {
+    public boolean calculateLoan() {
+    	try {
+    		if (this.kwota == null || this.lata == null || this.procent == null) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Uzupełnij wszystkie pola",null));
+                return false;
+            }
+    		
             Double loanAmount = Double.parseDouble(kwota);
             int loanYears = Integer.parseInt(lata);
             Double interestRate = Double.parseDouble(procent);
-
-            // Additional validation
+            
             if (loanAmount <= 0 || loanYears <= 0 || interestRate <= 0) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Proszę wprowadzić dodatnie liczby",null));
-                return null; // Exit the method on validation failure
+                return false;
             }
-
-            // Perform the loan calculation (e.g., simple interest formula)
             
             Double monthlyInterestRate = interestRate / 100 / 12;
             Double numberOfPayments = (double)loanYears * 12;
             result = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+            return true;
+
         } catch (NumberFormatException e) {
-            // Handle number format exceptions
-            FacesContext context = FacesContext.getCurrentInstance();
+        	FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawne wartości",null));
-            nope = false;
+            return false;
         }
-        
-        if(nope) {
-        	return "showresult"; // This is the navigation outcome
-        } else {
-            return null; // If validation fails, stay on the same page
+    }
+
+
+    public String calc() {
+    	if(calculateLoan()) {
+        	return "showresult";
         }
-        	
+        return null;
     }
     
     public String goBackToCalculator() {
-    	return "index"; // This is the navigation outcome
-
+    	return "index";
     }
 }
+    
+        	
+
+ 
