@@ -11,7 +11,7 @@
 <h:body>
     <h:form id="bla">
         <p:panel id="basic" header="Kalkulator kredytowy" styleClass="custom-panel">
-            <h:panelGrid id="grid" columns="5" cellpadding="5">
+            <h:panelGrid id="grid" columns="5" cellpadding="5"  styleClass="bottom-space">
                 <p:outputLabel for="loanAmount">Loan amount: </p:outputLabel>
                 <p:inputText id="loanAmount" value="#{kredBB.kwota}" required="true" requiredMessage="No loan amount" converterMessage="LA must be a number" validatorMessage="LA must be a number between 0 and something">
                     <f:convertNumber type="currency"/>
@@ -38,7 +38,7 @@
             
             <p:commandButton value="Przelicz" action="#{kredBB.calc()}" update="@form" />
     
-            <p:outputText value="Miesięczna rata: #{kredBB.result}"/>
+<h:outputText value="wynik: #{calcBB.result}" rendered="#{calcBB.result != null}" />
         </p:panel>
     </h:form>
 </h:body>

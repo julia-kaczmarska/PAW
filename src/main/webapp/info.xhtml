@@ -5,21 +5,18 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<ui:composition template="/templates/page-template.xhtml">
+<ui:composition template="/templates/main-template.xhtml">
 
-	<ui:define name="title">Wynik</ui:define>
+	<ui:define name="title">
+		JSF 02 - Informacje
+	</ui:define>
 
-	<ui:define name="pageContent">
-
-		<h:messages />
-		<div class="bottom-space">
-			<h:outputText value="wynik: #{calcBB.result}"
-				rendered="#{calcBB.result != null}" />
-		</div>
+	<ui:define name="content">
+		<h:graphicImage name="img/java.png" library="template" />
+		Pusta strona przykładowa ...
 		<h:form>
-			<h:commandButton value="Powrót" action="index" />
+			<h:commandLink value="Strona główna" action="index" />
 		</h:form>
-
 	</ui:define>
 
 </ui:composition>
