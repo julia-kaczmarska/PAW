@@ -1,0 +1,49 @@
+/* Styl dla etykiet */
+.ui-outputlabel {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Styl dla pól wejściowych */
+.ui-inputfield {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Styl dla przycisków */
+.ui-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ui-button:hover {
+    background-color: #0056b3;
+}
+
+/* Styl dla wyjścia wyniku */
+.ui-outputtext {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Styl dla wiadomości o błędach */
+.ui-message-error {
+    color: #ff0000;
+    font-weight: bold;
+}
+.custom-panel {
+    margin: 1em auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

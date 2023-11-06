@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+    <title>Wysokość raty miesięcznej:</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputText value="Wysokość raty miesięcznej:" style="font-weight: bold; font-size: 20px;" /><br/><br/>
+
+        <h:outputText value="Kwota początkowa: #{kredBB.kwota}" /><br/>
+        <h:outputText value="Okres: #{kredBB.lata} lat(a)" /><br/>
+        <h:outputText value="Opocentowanie kredytu: #{kredBB.procent}%" /><br/><br/>
+
+        <h:outputText value="Rata wynosi: #{kredBB.result}" rendered="#{not empty kredBB.result}" />
+        <h:outputText value="#{kredBB.result}" style="font-weight: bold; font-size: 24px;" /><br/>
+        
+        <h:commandButton value="Powrót" action="#{kredBB.goBackToCalculator}" />
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Loan calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</h:head>
+<h:body>
+    <h:form id="bla">
+        <p:panel id="basic" header="Kalkulator kredytowy" styleClass="custom-panel">
+            <h:panelGrid id="grid" columns="5" cellpadding="5">
+                <p:outputLabel for="loanAmount">Loan amount: </p:outputLabel>
+                <p:inputText id="loanAmount" value="#{kredBB.kwota}" required="true" requiredMessage="No loan amount" converterMessage="LA must be a number" validatorMessage="LA must be a number between 0 and something">
+                    <f:convertNumber type="currency"/>
+                    <f:validateDoubleRange minimum="1" maximum="100"/>
+                </p:inputText>
+                $
+                <p:message for="loanAmount"/>
+                
+                <p:outputLabel for="loanDuration">Loan duration:</p:outputLabel>
+                <p:inputText id="loanDuration" value="#{kredBB.lata}" required="true" requiredMessage="No loan duration" converterMessage="LD must be a whole number" validatorMessage="LA must be a number between 0 and something">
+                    <f:convertNumber type="currency"/>
+                    <f:validateLongRange minimum="1" maximum="100"/>
+                </p:inputText>
+                years
+                <p:message for="loanDuration"/>
+                
+                <p:outputLabel for="interestRate">Interest rate:</p:outputLabel>
+                <p:inputText id="interestRate" value="#{kredBB.procent}" required="true" requiredMessage="No interest rate" converterMessage="IR must be a number" validatorMessage="LA must be a number between 0 and something">
+                    <f:validateDoubleRange minimum="1" maximum="100"/>
+                </p:inputText>
+                %
+                <p:message for="interestRate"/>
+            </h:panelGrid>
+            
+            <p:commandButton value="Przelicz" action="#{kredBB.calc()}" update="@form" />
+    
+            <p:outputText value="Miesięczna rata: #{kredBB.result}"/>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
